@@ -20,9 +20,9 @@ jobs:
           persist-credentials: false
 
       - name: Lint this repo
-        run: bash skills/skill-end-to-end/scripts/lint_skill.sh .
+        run: bash skills/skill-forger-e2e/scripts/lint_skill.sh .
 
       - name: Scaffold a skill and lint it
         run: |
-          bash skills/skill-end-to-end/scripts/new_skill.sh demo-skill "$RUNNER_TEMP/demo" "CI" ci "Demo skill."
+          bash skills/skill-forger-e2e/scripts/new_skill.sh demo-skill "$RUNNER_TEMP/demo" "CI" ci "Demo skill."
           bash "$RUNNER_TEMP/demo/scripts/lint_skill.sh" "$RUNNER_TEMP/demo"

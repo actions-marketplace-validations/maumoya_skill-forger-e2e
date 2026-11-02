@@ -1,15 +1,15 @@
 ---
-name: skill-end-to-end
-description: Make an agent skill end to end, from idea to a published, tested, secured and launched Claude Code plugin repo. Use when the user says "make a skill", "build a skill", "turn this into a skill", "create a SKILL.md", "package my skill as a plugin", "test my skill", "write evals for my skill", "publish my skill", "skill end to end", or asks what step comes next for a skill. Walks eight gated phases (decide, define, author, test, package, secure, launch, loop) with a scaffold script and a linter.
+name: skill-forger-e2e
+description: Make an agent skill end to end, from idea to a published, tested, secured and launched Claude Code plugin repo. Use when the user says "make a skill", "build a skill", "turn this into a skill", "create a SKILL.md", "package my skill as a plugin", "test my skill", "write evals for my skill", "publish my skill", "skill end to end", "skill forger", "forge a skill", or asks what step comes next for a skill. Walks eight gated phases (decide, define, author, test, package, secure, launch, loop) with a scaffold script and a linter.
 license: MIT
 ---
 
-# Skill End to End
+# Skill Forger E2E
 
 Eight phases. Each has a gate. Do not start a phase until the previous gate passes.
 Tell the user which phase you are in and what passes its gate, in one line.
 
-Paths below are relative to this skill's folder (`skills/skill-end-to-end/`).
+Paths below are relative to this skill's folder (`skills/skill-forger-e2e/`).
 
 ## Phase 0 · Decide (is a skill the right thing?)
 

@@ -25,19 +25,19 @@ jobs:
       - name: Build zip
         env:
           TAG: ${{ github.ref_name }}
-        run: git archive --format=zip --prefix=skill-end-to-end/ -o "skill-end-to-end-${TAG}.zip" "$TAG" skills/skill-end-to-end LICENSE README.md
+        run: git archive --format=zip --prefix=skill-forger-e2e/ -o "skill-forger-e2e-${TAG}.zip" "$TAG" skills/skill-forger-e2e LICENSE README.md
 
       - name: Hash
         id: hash
         env:
           TAG: ${{ github.ref_name }}
-        run: echo "hashes=$(sha256sum "skill-end-to-end-${TAG}.zip" | base64 -w0)" >> "$GITHUB_OUTPUT"
+        run: echo "hashes=$(sha256sum "skill-forger-e2e-${TAG}.zip" | base64 -w0)" >> "$GITHUB_OUTPUT"
 
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
-        run: gh release create "$TAG" "skill-end-to-end-${TAG}.zip" --verify-tag --title "$TAG" --generate-notes
+        run: gh release create "$TAG" "skill-forger-e2e-${TAG}.zip" --verify-tag --title "$TAG" --generate-notes
 
   provenance:
     name: Signed provenance
@@ -51,4 +51,4 @@ jobs:
     with:
       base64-subjects: ${{ needs.build.outputs.hashes }}
       upload-assets: true
-      provenance-name: skill-end-to-end-${{ github.ref_name }}.intoto.jsonl
+      provenance-name: skill-forger-e2e-${{ github.ref_name }}.intoto.jsonl

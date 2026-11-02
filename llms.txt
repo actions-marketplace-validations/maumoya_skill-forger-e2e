@@ -1,18 +1,18 @@
-# Skill End to End
+# Skill Forger E2E
 
 > Make an agent skill end to end: decide, define, author, test with evals, package as a Claude Code plugin, secure, launch and measure. Eight gated phases, a scaffold script and a keyless linter.
 
 ## Install
 
-- Claude Code: `/plugin marketplace add maumoya/skill-end-to-end` then `/plugin install skill-end-to-end@skill-end-to-end`
-- Any agent: `npx skills add maumoya/skill-end-to-end`
+- Claude Code: `/plugin marketplace add maumoya/skill-forger-e2e` then `/plugin install skill-forger-e2e@skill-forger-e2e`
+- Any agent: `npx skills add maumoya/skill-forger-e2e`
 
 ## Files
 
-- [SKILL.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/SKILL.md): the eight phases and their gates
-- [authoring.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/authoring.md): frontmatter and body rules
-- [testing.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/testing.md): lint, trigger tests, claude plugin eval
-- [packaging.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/packaging.md): plugin layout and install paths
-- [security.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/security.md): Scorecard, CodeQL, pinning, SLSA
-- [launch.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/launch.md): README, discovery, channels
-- [README.md](https://github.com/maumoya/skill-end-to-end/blob/main/README.md)
+- [SKILL.md](https://github.com/maumoya/skill-forger-e2e/blob/main/skills/skill-forger-e2e/SKILL.md): the eight phases and their gates
+- [authoring.md](https://github.com/maumoya/skill-forger-e2e/blob/main/skills/skill-forger-e2e/references/authoring.md): frontmatter and body rules
+- [testing.md](https://github.com/maumoya/skill-forger-e2e/blob/main/skills/skill-forger-e2e/references/testing.md): lint, trigger tests, claude plugin eval
+- [packaging.md](https://github.com/maumoya/skill-forger-e2e/blob/main/skills/skill-forger-e2e/references/packaging.md): plugin layout and install paths
+- [security.md](https://github.com/maumoya/skill-forger-e2e/blob/main/skills/skill-forger-e2e/references/security.md): Scorecard, CodeQL, pinning, SLSA
+- [launch.md](https://github.com/maumoya/skill-forger-e2e/blob/main/skills/skill-forger-e2e/references/launch.md): README, discovery, channels
+- [README.md](https://github.com/maumoya/skill-forger-e2e/blob/main/README.md)

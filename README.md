@@ -1,4 +1,4 @@
-# Skill End to End
+# Skill Forger E2E
 
 Make an agent skill end to end: decide, define, author, test with evals, package as a Claude Code
 plugin, secure, launch and measure. Eight gated phases, a scaffold script and a keyless linter.
@@ -16,14 +16,14 @@ Each phase ends in a gate the agent must pass (and show) before moving on.
 Claude Code plugin:
 
 ```
-/plugin marketplace add maumoya/skill-end-to-end
-/plugin install skill-end-to-end@skill-end-to-end
+/plugin marketplace add maumoya/skill-forger-e2e
+/plugin install skill-forger-e2e@skill-forger-e2e
 ```
 
 Any agent that reads skills:
 
 ```
-npx skills add maumoya/skill-end-to-end
+npx skills add maumoya/skill-forger-e2e
 ```
 
 ## Use
@@ -41,17 +41,17 @@ Type one of:
 |---|---|---|
 | 0 Decide | one sentence: who, what, better than what exists | search commands |
 | 1 Define | triggers, non-triggers, done-when, saved baseline | — |
-| 2 Author | linter prints `PASS` | `new_skill.sh`, `lint_skill.sh`, [authoring.md](skills/skill-end-to-end/references/authoring.md) |
-| 3 Test | every eval passes and the skill beats the baseline | eval template, [testing.md](skills/skill-end-to-end/references/testing.md) |
-| 4 Package | clean install from the public repo fires the skill | plugin + marketplace JSON, [packaging.md](skills/skill-end-to-end/references/packaging.md) |
-| 5 Secure | Scorecard ran, CodeQL green, signed release | SHA-pinned workflows, SLSA release, [security.md](skills/skill-end-to-end/references/security.md) |
-| 6 Launch | 10-second README test + one channel submitted | [launch.md](skills/skill-end-to-end/references/launch.md) |
+| 2 Author | linter prints `PASS` | `new_skill.sh`, `lint_skill.sh`, [authoring.md](skills/skill-forger-e2e/references/authoring.md) |
+| 3 Test | every eval passes and the skill beats the baseline | eval template, [testing.md](skills/skill-forger-e2e/references/testing.md) |
+| 4 Package | clean install from the public repo fires the skill | plugin + marketplace JSON, [packaging.md](skills/skill-forger-e2e/references/packaging.md) |
+| 5 Secure | Scorecard ran, CodeQL green, signed release | SHA-pinned workflows, SLSA release, [security.md](skills/skill-forger-e2e/references/security.md) |
+| 6 Launch | 10-second README test + one channel submitted | [launch.md](skills/skill-forger-e2e/references/launch.md) |
 | 7 Loop | one measured fix per round | `measure.sh` |
 
 ### Scaffold a new skill repo
 
 ```bash
-bash skills/skill-end-to-end/scripts/new_skill.sh my-skill ../my-skill "Your Name" your-github "What it does, for whom."
+bash skills/skill-forger-e2e/scripts/new_skill.sh my-skill ../my-skill "Your Name" your-github "What it does, for whom."
 ```
 
 You get `SKILL.md`, plugin and marketplace JSON, an eval case, lint/Scorecard/CodeQL/release
@@ -61,7 +61,7 @@ an MIT license, and a README in the order that works.
 ### Lint any skill repo
 
 ```bash
-bash skills/skill-end-to-end/scripts/lint_skill.sh path/to/repo
+bash skills/skill-forger-e2e/scripts/lint_skill.sh path/to/repo
 ```
 
 Checks frontmatter rules, name/folder match, description length and trigger wording, broken links to
