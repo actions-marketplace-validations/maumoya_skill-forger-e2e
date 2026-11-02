@@ -1,0 +1,13 @@
+# __TITLE__
+
+> __DESCRIPTION__
+
+## Install
+
+- Claude Code: `/plugin marketplace add __GH__/__NAME__` then `/plugin install __NAME__@__NAME__`
+- Any agent: `npx skills add __GH__/__NAME__`
+
+## Files
+
+- [SKILL.md](https://github.com/__GH__/__NAME__/blob/main/skills/__NAME__/SKILL.md): the skill
+- [README.md](https://github.com/__GH__/__NAME__/blob/main/README.md): what it does and how to install it

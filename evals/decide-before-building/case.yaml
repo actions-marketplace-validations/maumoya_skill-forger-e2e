@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: decide-before-building
+expected_outcome: |
+  The agent runs Phase 0 first: it questions whether a skill is the right tool for pretty-printing JSON (jq and the model already do it), mentions searching for existing skills, and does not create any SKILL.md or repo files in this turn.

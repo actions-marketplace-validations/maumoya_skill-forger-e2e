@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: scaffold-and-lint
+expected_outcome: |
+  The agent scaffolds a repo for a meeting-notes skill with the skill's new_skill.sh, fills in SKILL.md with a description that holds the given trigger phrases and a "Done when" list, runs lint_skill.sh on the result, and shows a PASS line.

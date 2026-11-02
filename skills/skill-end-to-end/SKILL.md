@@ -1,0 +1,95 @@
+---
+name: skill-end-to-end
+description: Make an agent skill end to end, from idea to a published, tested, secured and launched Claude Code plugin repo. Use when the user says "make a skill", "build a skill", "turn this into a skill", "create a SKILL.md", "package my skill as a plugin", "test my skill", "write evals for my skill", "publish my skill", "skill end to end", or asks what step comes next for a skill. Walks eight gated phases (decide, define, author, test, package, secure, launch, loop) with a scaffold script and a linter.
+license: MIT
+---
+
+# Skill End to End
+
+Eight phases. Each has a gate. Do not start a phase until the previous gate passes.
+Tell the user which phase you are in and what passes its gate, in one line.
+
+Paths below are relative to this skill's folder (`skills/skill-end-to-end/`).
+
+## Phase 0 · Decide (is a skill the right thing?)
+
+A skill is right when the job repeats, needs know-how the model does not have by default, and fits in instructions plus small scripts.
+Not a skill: a one-off task (just do it), a fact (put it in CLAUDE.md), a long-running service (build an MCP server), a hard rule that must always fire (use a hook).
+
+Search before building: `npx skills find <words>`, GitHub search `<words> SKILL.md`, the anthropics/skills repo, the awesome-claude-skills lists.
+If one exists and is good, install it instead. If it exists and is weak, say what yours does better in one sentence.
+
+**Gate 0:** one sentence: "This skill helps WHO do WHAT, better than WHAT EXISTS because WHY."
+
+## Phase 1 · Define
+
+Write down, before any SKILL.md:
+- **Job:** the input the user gives and the output they get.
+- **Triggers:** 5–10 phrases a real user types. Include the slash name. Add 3 phrases that must NOT trigger it.
+- **Done when:** 2–4 checkable outcomes. These become the eval graders in Phase 3.
+- **Baseline:** run the job once with no skill and save what the model did. This is what the skill must beat.
+
+**Gate 1:** job, triggers, non-triggers, done-when and a saved baseline exist.
+
+## Phase 2 · Author
+
+Scaffold: `scripts/new_skill.sh <skill-name> <target-dir> "<Owner Name>"`. It copies `templates/repo/` and fills the names.
+Rules (full list in `references/authoring.md`):
+- `name`: lowercase letters, digits, hyphens; ≤64 chars; equals the folder name.
+- `description`: ≤1024 chars, third person, says what AND when, holds the trigger phrases. It is the only part the model sees before choosing the skill.
+- Body under 500 lines. Imperative steps. Move detail to `references/*.md` (read on demand) and repeatable work to `scripts/` (run, not read).
+- No secrets, no absolute home paths, no instructions to fetch and run remote code.
+
+**Gate 2:** `scripts/lint_skill.sh <repo-dir>` prints `PASS`.
+
+## Phase 3 · Test
+
+Details: `references/testing.md`.
+1. **Trigger test:** in a fresh session, type each trigger and each non-trigger. Record hit or miss. Fix the description until all hit and none misfire.
+2. **Evals:** one `evals/<case>/` per done-when (case.yaml + prompt.md + graders/). Each case ships its own input files.
+3. **Run:** `claude plugin eval <repo-dir> --allow-tools` (bills the user's account; ask first). It runs with and without the skill. Keep the report.
+4. **Keyless CI:** the linter runs in GitHub Actions on every PR.
+
+**Gate 3:** every case passes with the skill and the skill beats the baseline on at least one. If not, back to Phase 2.
+
+## Phase 4 · Package
+
+Details: `references/packaging.md`.
+- `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` (the scaffold made them).
+- Install paths to document: `/plugin marketplace add OWNER/REPO` then `/plugin install NAME@NAME`, and `npx skills add OWNER/REPO`.
+- Test both installs in a clean session before claiming they work.
+- Semantic version in plugin.json; `CHANGELOG.md`; git tag `vX.Y.Z` per release.
+
+**Gate 4:** a clean install from the public repo loads the skill and a trigger fires it.
+
+## Phase 5 · Secure
+
+Details: `references/security.md`. Templates are in `templates/repo/.github/`.
+- Workflows: lint, OpenSSF Scorecard, CodeQL (`actions`), Dependabot for actions, SLSA-signed release.
+- Every action pinned to a full commit SHA; `permissions: read-all` at the top.
+- `SECURITY.md` with a private reporting path. Branch protection on main.
+- Review every script the skill runs: no network writes, no piping downloads into a shell, no secret reads.
+- Register at bestpractices.dev and reach "passing" honestly.
+
+**Gate 5:** Scorecard has run, CodeQL is green, a signed release exists.
+
+## Phase 6 · Launch
+
+Details: `references/launch.md`. Every post, form or PR to another repo is an outward action: ask the user first.
+- README order: picture or ≤10 s GIF, one-line promise, two install commands, one example, FAQ.
+- Repo description ≤350 chars opening with what + who; ≤20 topics; homepage (GitHub Pages) with Open Graph tags; `llms.txt`.
+- Channels in order: Anthropic plugin directory form, skills.sh, awesome lists (each on its own rules), the niche community, then an essay that teaches something and links the repo.
+
+**Gate 6:** README passes the 10-second test (a stranger can say what it does and how to install it) and one channel submission is done.
+
+## Phase 7 · Loop
+
+Run `scripts/measure.sh OWNER/REPO [BEST_PRACTICES_ID]`. Pick the one highest-impact gap. Fix it on a branch with a PR. Re-measure after merge. Report the delta in one row.
+Re-run Phase 3 evals before every release.
+
+## Honesty rules
+
+- Never claim a phase passed without running its check. Show the output.
+- Stars and installs cannot be promised. Badges show live measurements only.
+- No bought stars, star swaps, fake reviews, or the same link posted in many places.
+- The user merges PRs and submits forms. You prepare them.

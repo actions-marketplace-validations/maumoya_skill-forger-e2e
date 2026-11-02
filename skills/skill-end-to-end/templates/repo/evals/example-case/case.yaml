@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: example-case
+expected_outcome: |
+  REPLACE: one or two sentences saying what a correct run looks like for this case.

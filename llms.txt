@@ -1,0 +1,18 @@
+# Skill End to End
+
+> Make an agent skill end to end: decide, define, author, test with evals, package as a Claude Code plugin, secure, launch and measure. Eight gated phases, a scaffold script and a keyless linter.
+
+## Install
+
+- Claude Code: `/plugin marketplace add maumoya/skill-end-to-end` then `/plugin install skill-end-to-end@skill-end-to-end`
+- Any agent: `npx skills add maumoya/skill-end-to-end`
+
+## Files
+
+- [SKILL.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/SKILL.md): the eight phases and their gates
+- [authoring.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/authoring.md): frontmatter and body rules
+- [testing.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/testing.md): lint, trigger tests, claude plugin eval
+- [packaging.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/packaging.md): plugin layout and install paths
+- [security.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/security.md): Scorecard, CodeQL, pinning, SLSA
+- [launch.md](https://github.com/maumoya/skill-end-to-end/blob/main/skills/skill-end-to-end/references/launch.md): README, discovery, channels
+- [README.md](https://github.com/maumoya/skill-end-to-end/blob/main/README.md)

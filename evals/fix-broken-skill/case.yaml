@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: fix-broken-skill
+expected_outcome: |
+  The agent runs lint_skill.sh on ./my-skill, fixes the failures it reports (name not matching the folder, missing references/sorting.md, unpinned action and missing permissions, plugin version not X.Y.Z), rewrites the description to say when to use the skill, re-runs the linter and shows PASS.
+context:
+  scaffold_script: place-files.sh

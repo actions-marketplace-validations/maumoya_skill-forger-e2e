@@ -1,0 +1,28 @@
+# Lint: keyless checks on every PR (frontmatter, JSON, eval layout, risky patterns). No API key needed.
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions: read-all
+
+jobs:
+  lint:
+    name: Lint skill
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Lint this repo
+        run: bash skills/skill-end-to-end/scripts/lint_skill.sh .
+
+      - name: Scaffold a skill and lint it
+        run: |
+          bash skills/skill-end-to-end/scripts/new_skill.sh demo-skill "$RUNNER_TEMP/demo" "CI" ci "Demo skill."
+          bash "$RUNNER_TEMP/demo/scripts/lint_skill.sh" "$RUNNER_TEMP/demo"
