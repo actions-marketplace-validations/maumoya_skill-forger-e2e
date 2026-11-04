@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.10.0
+
+- The agent does the GitHub work end to end: push, PR, merge, signed tag, release, Marketplace, private reporting,
+  ruleset, Best Practices form (to 100% of passing) and About/social preview, in the built-in browser where the owner
+  is signed in. The owner keeps sign-ins, passkeys and terms. New "Who does what" section.
+- Launch checklist (a-h) in SKILL.md, swept before every status or done report, each row with its proof; with the
+  adhd-status skill installed it runs as that skill's sweep.
+- `make_demo.sh` + `record_page.mjs`: a <=10 s README demo GIF under 5 MB from a screen recording or a URL
+  (headless Chrome screencast).
+- New ship gates in `readiness.sh --ship`: header banner, demo video card and result card (were plain checks),
+  owner-only authorship (no AI co-author trailer or footer in commits or files), main head signed + Verified +
+  authored by the owner, latest release tag signed + Verified.
+- Update round rewrites the whole README body, `llms.txt`, description and topics for the new version, not just numbers.
+- This repo: README order is banner, badges, demo card, result card.
+
+## 0.9.0
+
+- Update round: `scripts/sync.py` keeps every published number in step with one `launch/facts.json`. It re-renders SVG
+  cards and banners from templates, re-runs generators (PNG, GIF) with `--run`, updates fact markers in
+  Markdown, lists owner-only places (social preview, About, profile row), and `check` fails on any stale surface or old
+  value left by hand, badge URLs included. `--no-outward` for CI.
+- `make_header.sh OUT_DIR --png-only` re-renders header.png from an updated header.svg.
+- This repo: `launch/` drives the bench card and header; README re-measured (readiness 100/100, retrofit 14 → 66,
+  18 files) with both results under one dated Results section; CI runs the sync check.
+
+## 0.8.0
+
+- Ship gates: `readiness.sh . OWNER/REPO --ship` exits 1 unless OpenSSF Scorecard ≥ 7.3, Best Practices is passing,
+  private vulnerability reporting is on, and a ruleset on main requires a PR and CodeQL. The Action does the same
+  with `ship-gates: true`. Phase 5 is now a hard gate before every release tag.
+- `templates/ruleset-main.json`: the "Protect main" ruleset (PR + 1 review, CodeQL required, no force push or delete).
+- readiness also checks CodeQL, `permissions: read-all` in every workflow, SHA-pinned actions, one version across
+  plugin.json, CHANGELOG, README and llms.txt, an action self-test (or flags "no action.yml = not on the Marketplace"),
+  benefit badges in % instead of raw sizes, and a hero result card.
+- `marketplace_check.sh` fails without a CI self-test (a passing `uses: ./` run and one asserted as failure) and on
+  version drift. Packaging notes that Update release triggers GitHub sudo (passkey): owner OK first.
+- `scorecard.sh`: ship bar line, ruleset and private-reporting fixes, and a short live "OpenSSF" profile badge.
+- Launch: results as percentages, a big green SVG hero card, profile row and portfolio site updated in the same pass.
+- This repo: CI self-tests the Action on a failing repo; README leads with the measured bench card (47% vs 0%).
+
 ## 0.7.0
 
 - Spec lint: `lint_skill.sh` checks frontmatter against the Agent Skills spec (allowed keys, `compatibility`

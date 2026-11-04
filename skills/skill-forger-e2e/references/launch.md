@@ -16,6 +16,12 @@ In this order:
    raised. Each links to a dated `## Results (measured DATE)` section with the method and a table, so anyone can
    check it. `scripts/bench.sh` writes that section from a with-vs-without eval run (billed; ask first), and
    `badges.sh` refuses a value whose numbers are not in it. No measurement, no benefit badge.
+   Percentages, never raw sizes: "19% of the disk freed (6% → 25% free)", "100% of deletes approved"; a reader
+   cannot judge "86 GiB" without the disk size. readiness flags benefit badges with GiB/MB in them.
+   The hero result also goes in a big green SVG card (`assets/<name>-card.svg`, about 760×240: the big % on the left,
+   before/after bars on the right, the honest cost line under them) linked to the Results section.
+   Then, in the same pass: the owner's profile row and portfolio site get the new numbers. Profile tables use the
+   short live "OpenSSF 7.4" badge (`scorecard.sh` prints it), not the default Scorecard badge, which is unreadable there.
 2. One line: what it does, for whom.
 3. Two install commands (`/plugin install` and `npx skills add`).
 4. One real example.
@@ -50,6 +56,20 @@ In the 8 biggest skill repos (measured 2026-11): 6 open with a picture, 5 docume
 4. The niche community the skill serves, then r/ClaudeAI, then X with the GIF.
 5. An essay that teaches something and links the repo (dev.to, a blog). Then Show HN with the essay,
    not the bare repo: bare skill-repo links on HN have scored 2–3 points.
+
+## Update round (every change, new measurement or version)
+
+One stale surface is a failed update. Re-measure first, then:
+1. Write the new values into `launch/facts.json` (`{"key": {"value", "source", "date"}}`), never copied from an old banner.
+2. `launch/assets.json` lists each surface: `{"path", "template", "uses"}` for SVG cards and banners (`{{key}}`,
+   `{{key|scale:360}}` for bar widths), `{"path", "run", "uses"}` for PNGs, GIFs and videos, `{"name", "outward", "uses"}`
+   for places outside the repo (social preview, About box, profile row). Numbers in Markdown sit in fact markers (format in the header of `scripts/sync.py`).
+3. `python3 scripts/sync.py apply . --run`, then `sync.py check .` until "in sync". LEFTOVER means an old value is still
+   written by hand somewhere (badge URLs, alt text): fix that line. `launch/keep.txt` lists files left alone (tests).
+4. Update each outward item yourself in the built-in browser; after each, `sync.py done . "<name>"`. CI runs
+   `sync.py check . --no-outward`.
+5. Rewrite the README body, `llms.txt`, description and topics for the current version (Phase 4, update round).
+6. New demo? `scripts/make_demo.sh INPUT assets/demo.gif`, then the same file on the portfolio site.
 
 ## Never
 

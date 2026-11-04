@@ -25,6 +25,11 @@ jobs:
       - name: Lint catches broken skills
         run: bash tests/lint_cases.sh
 
+      - name: Every published number matches launch/facts.json
+        run: |
+          python3 -I tests/test_sync.py
+          python3 -I skills/skill-forger-e2e/scripts/sync.py check . --no-outward
+
       - name: Scaffold a skill and lint it
         run: |
           bash skills/skill-forger-e2e/scripts/new_skill.sh demo-skill "$RUNNER_TEMP/demo" "CI" ci "Demo skill."
@@ -70,3 +75,21 @@ jobs:
         uses: ./
         with:
           min-score: 80
+
+      - name: The action fails a repo below min-score
+        id: low
+        continue-on-error: true
+        uses: ./
+        with:
+          path: evals/retrofit-and-score/files/haiku-coach
+          repo: ""
+          lint: "false"
+          min-score: 99
+
+      - name: Assert the low-score run failed
+        env:
+          OUTCOME: ${{ steps.low.outcome }}
+          SCORE: ${{ steps.low.outputs.score }}
+        run: |
+          echo "outcome=$OUTCOME score=$SCORE"
+          [ "$OUTCOME" = failure ] && [ -n "$SCORE" ] && [ "$SCORE" -lt 99 ]
